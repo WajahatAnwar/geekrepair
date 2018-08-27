@@ -31,7 +31,7 @@ class ShopifyController extends Controller
     					'myshopifyDomain' => $shop->myshopify_domain,
     					'accessToken' => $shop->access_token
 					]);
-				$this->create_template();
+				// $this->create_template();
     			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '2']);
     		}
     		else{
