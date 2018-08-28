@@ -13,7 +13,7 @@ return [
 
     'key' => env("SHOPIFY_API_KEY", null),
     'secret' => env("SHOPIFY_API_SECRET", null),
-    'scope' => ["read_products", "write_script_tags", "write_products", "read_themes", "write_themes"],
+    'scope' => ["read_products", "write_script_tags", "write_products", "read_themes", "write_themes", "read_customers", "write_customers", "read_orders", "write_orders", "read_all_orders", "read_draft_orders", "write_draft_orders"],
     'redirect_uri' => env("SHOPIFY_REDIRECT_URI" , NULL),
     'billing_enabled' => env('SHOPIFY_BILLING_ENABLED' , FALSE),
     'billing_price' => env("SHOPIFY_BILLING_PRICE", NULL),
