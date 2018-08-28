@@ -17,10 +17,22 @@ class ShopifyWebhook {
             "format" => "json"
             
         ];
+
+        $postData2 = [
+            
+            "topic" => "orders/create",
+            "address" => config('app.url') . '/shopify/webhook/order_create',
+            "format" => "json"
+            
+        ];
         
         return Shopify::setShopUrl(session('myshopifyDomain'))
                        ->setAccessToken(session('accessToken'))
                        ->post('admin/webhooks.json' , [ "webhook" => $postData]);
+        
+        return Shopify::setShopUrl(session('myshopifyDomain'))
+                       ->setAccessToken(session('accessToken'))
+                       ->post('admin/webhooks.json' , [ "webhook" => $postData2]);
     }
     
 }

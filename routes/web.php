@@ -21,6 +21,7 @@ Route::group(['prefix' => 'shopify'] , function(){
 	Route::get('access' , 'ShopifyController@access')->name('shopify.access');
 	Route::get('callback' , 'ShopifyController@callback')->name('shopify.callback');
 	Route::post('webhook/app_uninstall' , 'WebhookController@app_uninstall');
+	Route::post('webhook/order_create' , 'WebhookController@order_create');
 
 });
 
