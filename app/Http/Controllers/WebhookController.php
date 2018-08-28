@@ -35,7 +35,7 @@ class WebhookController extends Controller
     {
 
 	    $data = $request->getContent();
-		dd($data);
+		// dd($data);
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 		Log::info('order hook handle');
 		die();
