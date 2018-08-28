@@ -38,6 +38,7 @@ class WebhookController extends Controller
 		// dd($data);
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 		Log::info('order hook handle');
+		echo "Hook Available";
 		die();
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
 	        
