@@ -37,15 +37,15 @@ class WebhookController extends Controller
 	    $data = $request->getContent();
 		// dd($data);
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
-		Log::info('order hook handle');
+		Log::info('order hook handle 12');
 		// echo "Hook Available"; 
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
 	        
 			$payload = json_decode($data , true);
-			// dd($payload);
-	    	$shop = Shop::where('shopify_id' , $payload['id'])->first();
-	    	$shop->delete();
-	    	Log::info('Webhook Request verified and Handled.');
+			Log::info($payload);
+	    	// $shop = Shop::where('shopify_id' , $payload['id'])->first();
+	    	// $shop->delete();
+	    	// Log::info('Webhook Request verified and Handled.');
 	    	return new Response('Webhook Handled', 200);
 
 	    } else {
