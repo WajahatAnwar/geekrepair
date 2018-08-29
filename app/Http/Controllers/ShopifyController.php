@@ -114,8 +114,7 @@ class ShopifyController extends Controller
 	{
 		$shopUrl= session('myshopifyDomain');
 		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
-
-				return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
 	}
 
 	public function save_license_key()
@@ -143,6 +142,10 @@ class ShopifyController extends Controller
 				'resold'=> $resold, 
 				'updated_at' => date('Y-m-d H:i:s')]);
 		}
+		
+		$shopUrl= session('myshopifyDomain');
+		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
 	}
 
 }
