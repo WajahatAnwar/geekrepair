@@ -140,6 +140,7 @@ class ShopifyController extends Controller
 			]);
 		}else{
 			DB::table('product_license_key')->where('product_id', $product_id)->update([
+				'resold'=> $resold, 
 				'updated_at' => date('Y-m-d H:i:s')]);
 		}
 	}
