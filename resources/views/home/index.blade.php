@@ -39,7 +39,7 @@
 					</dl>
 				</div>
 				@endif
-				<form action="/save_data" method="POST">
+				<form action="/save_license_key" method="POST">
 					@csrf
 					<div>
 						<div class="" style="background-color: #5e8f3f;">
@@ -54,7 +54,6 @@
 									@endforeach
 								@endif
 							</select>
-							<input type="text" id="product_id" name="product_id" required/>
 						</div>
 						<div class="row">
 							<label>License key</label>
@@ -62,7 +61,7 @@
 						</div>
 						<div class="row">
 							<label>Resold</label>
-							<input type="text" id="eesold" name="resold" required/>
+							<input type="text" id="resold" name="resold" required/>
 						</div>
 					</div>
 					<div class="row">

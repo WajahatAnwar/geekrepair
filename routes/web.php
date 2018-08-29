@@ -34,5 +34,6 @@ Route::group(['prefix' => 'billing'] , function(){
 
 });
 Route::post('save_data' , 'ShopifyController@save_data');
+Route::post('save_license_key' , 'ShopifyController@save_license_key');
 Route::post('badges_available' , 'ShopifyController@badges_available');
 Route::get('reload' , 'ShopifyController@reload_theme');

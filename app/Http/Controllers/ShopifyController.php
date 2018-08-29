@@ -118,4 +118,30 @@ class ShopifyController extends Controller
 				return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
 	}
 
+	public function save_license_key()
+	{
+		$product_ids = $_POST['trigger_product'];
+		$dash_pos = strpos($product_ids, "-");
+		$product_id = substr($product_ids, 0, $dash_pos);
+		$product_name = substr($product_ids, $dash_pos+1);
+
+		$license_key = $_POST['license_key'];
+		$resold = $_POST['resold'];
+		$license_key_table = DB::Table('product_license_key')->where('product_id', $product_id )->where('license_key', $license_key)->first();
+		if(empty($license_key_table))
+		{
+			$id = DB::table('product_license_key')->insertGetId([
+				'product_id' => $product_id, 
+				'product_name' => $product_name,
+				'license_key' => $license_key, 
+				'resold'=> $resold, 
+				'created_at'=> date('Y-m-d H:i:s'), 
+				'updated_at'=> date('Y-m-d H:i:s')
+			]);
+		}else{
+			DB::table('product_license_key')->where('product_id', $product_id)->update([
+				'updated_at' => date('Y-m-d H:i:s')]);
+		}
+	}
+
 }
