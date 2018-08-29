@@ -71,6 +71,47 @@
 			</div>
 		</article>
 	</section>
+	<section id="">
+		<aside>
+  			<h2>List of License Keys</h2>
+			<p>This is the list of the license keys</p>
+		</aside>
+		<article>
+			<div class="card">
+				@if($success == "4")
+				<div class="alert success">
+					<dl>
+						<dt>Deleted Successfully</dt>
+						<dd>Right Click Prevention is Deleted From This Product</dd>
+					</dl>
+				</div>
+				@endif
+				<h5>List of License Keys</h5>
+				<table>
+					<thead>
+						<tr>
+						<th>Product Id</th>
+						<th>Product Name</th>
+						<th>License Key</th>
+						<th>Key Resold</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if(!empty($product_license_key))
+							@foreach ($product_license_key as $license_key)
+								<tr>
+									<td>{{ $license_key->product_id }}</td>
+									<td><a href="#">{{ $license_key->product_name }}</a></td>
+									<td><a href="#">{{ $license_key->license_key }}</a></td>
+									<td><a href="#">{{ $license_key->resold }}</a></td>
+								</tr>
+							@endforeach
+						@endif
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
 
 	<script>
     function store(){

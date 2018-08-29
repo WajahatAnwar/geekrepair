@@ -34,7 +34,8 @@ class ShopifyController extends Controller
 				$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
 					->setAccessToken($shop->access_token)
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
-    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, 'success' => '2']);
+				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
     		}
     		else{
     			$shopify = $this->shopify->setShopUrl($shopUrl);
@@ -142,7 +143,7 @@ class ShopifyController extends Controller
 				'resold'=> $resold, 
 				'updated_at' => date('Y-m-d H:i:s')]);
 		}
-		
+
 		$shopUrl= session('myshopifyDomain');
 		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
 		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
