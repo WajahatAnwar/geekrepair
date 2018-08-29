@@ -43,43 +43,27 @@
 					@csrf
 					<div>
 						<div class="" style="background-color: #5e8f3f;">
-							<h2 style="color: #ffffff;padding: 21px;">Set Add To Cart</h2>
+							<h2 style="color: #ffffff;padding: 21px;">Set License Key For Product</h2>
 						</div>
 						<div class="row">
-							<label>Text of button</label>
-							<input type="text" id="btn_text" name="btn_text" required/>
+							<label>Product</label>
+							<select data-placeholder="Choose a Product..." class="chosen-select" tabindex="2" name="trigger_product" id="" required>
+								@if(!empty($shop_products))
+									@foreach ($shop_products as $product)
+										<option value="{{ $product->id }}-{{ $product->title }}">{{ $product->title }}</option>
+									@endforeach
+								@endif
+							</select>
+							<input type="text" id="product_id" name="product_id" required/>
 						</div>
 						<div class="row">
-							<label>Color of button</label>
-							<input type="text" id="btn_color" name="btn_color" required/>
+							<label>License key</label>
+							<input type="text" id="license_key" name="license_key" required/>
 						</div>
 						<div class="row">
-							<label>Hover Color of button</label>
-							<input type="text" id="btn_color_hover" name="btn_color_hover" required/>
+							<label>Resold</label>
+							<input type="text" id="eesold" name="resold" required/>
 						</div>
-						<div class="row">
-							<label>Width of button(in percentage)</label>
-							<input type="number" id="btn_size" name="btn_size" max="100" required/>
-						</div>
-						<div class="row">
-							<label>Font Size</label>
-							<input type="text" id="pitch_size" name="pitch_size" required/>
-						</div>
-					</div>
-					<div>
-						<div class="" style="background-color: #5e8f3f;">
-							<h2 style="color: #ffffff;padding: 21px;">Set Security Badges Attributes</h2>
-						</div>
-					</div>
-					<div class="row">
-						<label>Select Badges(Select Multiple Badges: hold shift and click on the options)</label>
-						<select name="cards[]" id="card" multiple>
-							<option value="mastercard">Master Card</option>
-							<option value="visa">Visa Card</option>
-							<option value="amex">American Express</option>
-							<option value="paypal">Paypal</option>
-							<option value="discover">Discover</option>
-						</select>
 					</div>
 					<div class="row">
 						<input type="submit" onclick="store()" class="button secondary">
