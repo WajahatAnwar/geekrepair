@@ -127,10 +127,12 @@ class ShopifyController extends Controller
 
 		$license_key = $_POST['license_key'];
 		$resold = $_POST['resold'];
+		$shopify_store_id = $_POST['shopify_store_id'];
 		$license_key_table = DB::Table('product_license_key')->where('product_id', $product_id )->where('license_key', $license_key)->first();
 		if(empty($license_key_table))
 		{
 			$id = DB::table('product_license_key')->insertGetId([
+				'shopify_store_id' => $shopify_store_id,
 				'product_id' => $product_id, 
 				'product_name' => $product_name,
 				'license_key' => $license_key, 

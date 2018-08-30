@@ -45,6 +45,7 @@
 						<div class="" style="background-color: #5e8f3f;">
 							<h2 style="color: #ffffff;padding: 21px;">Set License Key For Product</h2>
 						</div>
+						<input type="hidden" name="shopify_store_id" value="{{Session('shopifyId')}}">
 						<div class="row">
 							<label>Product</label>
 							<select data-placeholder="Choose a Product..." class="chosen-select" tabindex="2" name="trigger_product" id="" required>
