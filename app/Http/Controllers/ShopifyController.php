@@ -151,4 +151,11 @@ class ShopifyController extends Controller
 		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
 	}
 
+	public function test_function_for_order()
+	{
+		$product_id = "1452081643590";
+		$all_product_details = DB::Table('product_license_key')->where('product_id', $product_id );
+		dd($all_product_details);
+	}
+
 }

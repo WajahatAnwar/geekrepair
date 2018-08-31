@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Setting;
+use App\Objects\ScriptTag;
 use Log;
 use App\Shop;
 use Illuminate\Http\Request;
@@ -42,9 +45,11 @@ class WebhookController extends Controller
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
 	        
 			$payload = json_decode($data , true);
-			Log::info($payload['id']);
-			Log::info($payload['contact_email']);
-			Log::info($payload['line_items']['0']["id"]);
+			$order_id = $payload['id'];
+			$contact_email = $payload['contact_email'];
+			$product_id = $payload['line_items']['0']["id"];
+			
+			DB::Table('product_license_key')->where('product_id', $product_id );
 			
 	    	// $shop = Shop::where('shopify_id' , $payload['id'])->first();
 	    	// $shop->delete();
