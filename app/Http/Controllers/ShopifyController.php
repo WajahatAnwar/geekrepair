@@ -37,6 +37,7 @@ class ShopifyController extends Controller
 				$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
 					->setAccessToken($shop->access_token)
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
+				dd($shopProducts);
 				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
     			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
     		}
