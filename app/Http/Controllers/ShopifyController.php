@@ -37,7 +37,6 @@ class ShopifyController extends Controller
 				$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
 					->setAccessToken($shop->access_token)
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
-				dd($shopProducts);
 				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
     			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
     		}
@@ -159,6 +158,25 @@ class ShopifyController extends Controller
     			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
 
 		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
+	}
+
+	public function count_resold_license_keys()
+	{
+		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+		foreach($product_license_key as $key)
+		{
+			$license_key_count = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+							->where('license_key', $key->license_key)->count();
+
+			$id = DB::table('count_license_key')->insertGetId([
+				'product_name' => $key->product_name,
+				'license_key' => $key->license_key,
+				'resold' => $license_key_count, 
+				'created_at'=> date('Y-m-d H:i:s'), 
+				'updated_at'=> date('Y-m-d H:i:s')
+			]);
+		}
 	}
 
 	public function test_function_for_order()
