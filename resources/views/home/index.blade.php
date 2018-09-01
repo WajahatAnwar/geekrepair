@@ -31,11 +31,11 @@
 		</aside>
 		<article>
 			<div class="card">
-				@if($success == 4)
-				<div class="alert danger">
+				@if($success == 1)
+				<div class="alert success">
 					<dl>
-						<dt>Deleted Successfully</dt>
-						<dd>License key deleted successfully.</dd>
+						<dt>License Key Updated</dt>
+						<dd>All License Keys are updated successfully.</dd>
 					</dl>
 				</div>
 				@endif
@@ -80,10 +80,10 @@
 		<article>
 			<div class="card">
 				@if($success == "4")
-				<div class="alert success">
+				<div class="alert warning">
 					<dl>
 						<dt>Deleted Successfully</dt>
-						<dd>Right Click Prevention is Deleted From This Product</dd>
+						<dd>License key Deleted</dd>
 					</dl>
 				</div>
 				@endif
