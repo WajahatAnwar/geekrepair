@@ -148,6 +148,12 @@ class ShopifyController extends Controller
 
 		$shopUrl= session('myshopifyDomain');
 		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
+		$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
+					->setAccessToken($shop->access_token)
+					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
+				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
+
 		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
 	}
 
@@ -156,10 +162,10 @@ class ShopifyController extends Controller
 		$product_id = "1452081643590";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		dd($all_product_details);
-		// foreach($all_product_details as $product_detail)
-		// {
-		// 	dd($product_detail);
-		// }
+		foreach($all_product_details as $product_detail)
+		{
+			dd($product_detail);
+		}
 	}
 
 }
