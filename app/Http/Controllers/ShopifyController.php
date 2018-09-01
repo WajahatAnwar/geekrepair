@@ -168,14 +168,24 @@ class ShopifyController extends Controller
 			$license_key_count = DB::Table('customer_product_keys')
 					->select('product_id', 'license_key', 'customer_email')
 							->where('license_key', $key->license_key)->count();
-
-			$id = DB::table('count_license_key')->insertGetId([
-				'product_name' => $key->product_name,
-				'license_key' => $key->license_key,
-				'resold' => $license_key_count, 
-				'created_at'=> date('Y-m-d H:i:s'), 
-				'updated_at'=> date('Y-m-d H:i:s')
-			]);
+			$license_key_counting_check = DB::Table('count_license_key')
+				->select('license_key')
+					->where('license_key', $key->license_key)->first();
+			if(empty($license_key_counting_check))
+			{
+				$id = DB::table('count_license_key')->insertGetId([
+					'product_name' => $key->product_name,
+					'license_key' => $key->license_key,
+					'resold' => $license_key_count, 
+					'created_at'=> date('Y-m-d H:i:s'), 
+					'updated_at'=> date('Y-m-d H:i:s')
+				]);
+			}else
+			{
+				DB::table('count_license_key')->where('license_key', $key->license_key)->update([
+					'resold'=> $resold, 
+					'updated_at' => date('Y-m-d H:i:s')]);
+			}
 		}
 
 		$shopUrl= session('myshopifyDomain');
