@@ -48,7 +48,7 @@ class WebhookController extends Controller
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$contact_email = $payload['contact_email'];
-			$product_id = $payload['line_items']['0']["id"];
+			$product_id = $payload['line_items']['0']["product_id"];
 			Log::info($payload);
 			// Log::info($order_id);
 			// Log::info($contact_email);
