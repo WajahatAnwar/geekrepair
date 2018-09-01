@@ -173,7 +173,7 @@ class ShopifyController extends Controller
 					->where('product_id', $product_id)
 						->where('license_key', $license_key)->get();
 	
-			if(empty($validating_license_key))
+			if($validating_license_key)
 			{
 				dd("validationg");
 				$id = DB::table('customer_product_keys')->insertGetId([
