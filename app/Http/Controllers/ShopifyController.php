@@ -173,7 +173,7 @@ class ShopifyController extends Controller
 				->select('product_id', 'license_key', 'customer_email')
 						->where('license_key', $license_key)->count();
 
-			// dd($license_key_count);
+			dd($license_key_count);
 
 			$validating_license_key = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
