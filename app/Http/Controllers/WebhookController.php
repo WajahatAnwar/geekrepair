@@ -57,8 +57,8 @@ class WebhookController extends Controller
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 			
 			// Log::info($order_id);
-	
-			Log::info($all_product_details);
+			$email_sent = true;
+			// Log::info($all_product_details);
 			foreach($all_product_details as $product_detail)
 			{
 				$product_id2 = $product_detail->product_id;
@@ -80,15 +80,22 @@ class WebhookController extends Controller
 		
 					if(empty($validating_license_key))
 					{
-						$id = DB::table('customer_product_keys')->insertGetId([
-							'product_id' => $product_id,
-							'license_key' => $license_key, 
-							'customer_email' => $email,
-							'created_at'=> date('Y-m-d H:i:s'), 
-							'updated_at'=> date('Y-m-d H:i:s')
-						]);
-						$this->send($email, $license_key);
-						return false;
+						if($email_sent)
+						{
+							$id = DB::table('customer_product_keys')->insertGetId([
+								'product_id' => $product_id,
+								'license_key' => $license_key, 
+								'customer_email' => $email,
+								'created_at'=> date('Y-m-d H:i:s'), 
+								'updated_at'=> date('Y-m-d H:i:s')
+							]);
+							
+							$this->send($email, $license_key);
+							$email_sent = false;
+						}else{
+							Log::info("Email Already Sent");
+							return false;
+						}
 					}
 				}
 			}
