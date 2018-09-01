@@ -160,7 +160,7 @@ class ShopifyController extends Controller
 	public function test_function_for_order()
 	{
 		$product_id = "1452081643590";
-		$email =  "wajahat@wajahatCo.com";
+		$email =  "wajahat@gmail.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		
 
@@ -173,8 +173,8 @@ class ShopifyController extends Controller
 				->select('product_id', 'license_key', 'customer_email')
 						->where('license_key', $license_key)->count();
 
-			dd($license_key_count);
-			
+			// dd($license_key_count);
+
 			$validating_license_key = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
 					->where('product_id', $product_id)
