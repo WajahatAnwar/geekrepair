@@ -160,7 +160,7 @@ class ShopifyController extends Controller
 	public function test_function_for_order()
 	{
 		$product_id = "1452081643590";
-		$email =  "wajahat@fmail.com";
+		$email =  "wajahat@gmail.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		
 
