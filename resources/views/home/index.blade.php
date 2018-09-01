@@ -121,7 +121,7 @@
 		</aside>
 		<article>
 			<div class="card">
-				<h5>List of License Keys</h5>
+				<h5>How many time key Resold</h5>
 				<table>
 					<thead>
 						<tr>
