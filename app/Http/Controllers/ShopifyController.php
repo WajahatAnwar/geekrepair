@@ -185,7 +185,7 @@ class ShopifyController extends Controller
 				]);
 				dd("validationg");
 			}else{
-				dd("Not Empty Fuck yeah")
+				dd("Not Empty Fuck yeah");
 			}
 		}
 	}
