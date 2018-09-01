@@ -45,8 +45,6 @@ class WebhookController extends Controller
 
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
 			
-			Log::info($data);
-			die();
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$contact_email = $payload['contact_email'];
