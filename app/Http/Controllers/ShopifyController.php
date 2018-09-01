@@ -183,7 +183,7 @@ class ShopifyController extends Controller
 			}else
 			{
 				DB::table('count_license_key')->where('license_key', $key->license_key)->update([
-					'resold'=> $resold, 
+					'resold'=> $license_key_count, 
 					'updated_at' => date('Y-m-d H:i:s')]);
 			}
 		}
