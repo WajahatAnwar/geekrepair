@@ -84,7 +84,7 @@ class WebhookController extends Controller
 							]);
 							
 							$this->send($email, $license_key);
-							break 2;
+							break 1;
 						}else{
 							Log::info("Email Already Sent");
 							return false;
