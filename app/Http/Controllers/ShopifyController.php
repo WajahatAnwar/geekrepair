@@ -38,7 +38,8 @@ class ShopifyController extends Controller
 					->setAccessToken($shop->access_token)
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
 				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
-    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
+				$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
+    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);
     		}
     		else{
     			$shopify = $this->shopify->setShopUrl($shopUrl);
@@ -157,8 +158,8 @@ class ShopifyController extends Controller
 				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
     			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
 
-		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, 'success' => '1']);
-	}
+				$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
+    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);	}
 
 	public function count_resold_license_keys()
 	{

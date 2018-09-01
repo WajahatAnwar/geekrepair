@@ -114,6 +114,38 @@
 		</article>
 	</section>
 
+		<section id="">
+		<aside>
+  			<h2>Resold Count</h2>
+			<p>This list shows how many times a license key resold</p>
+		</aside>
+		<article>
+			<div class="card">
+				<h5>List of License Keys</h5>
+				<table>
+					<thead>
+						<tr>
+						<th>Product Name</th>
+						<th>License Key</th>
+						<th>Resold Count</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if(!empty($resold))
+							@foreach ($resold as $key)
+								<tr>
+									<td><a href="#">{{ $key->product_name }}</a></td>
+									<td><a href="#">{{ $key->license_key }}</a></td>
+									<td><a href="#">{{ $key->resold }}</a></td>
+								</tr>
+							@endforeach
+						@endif
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+
 	<script>
     function store(){
 
