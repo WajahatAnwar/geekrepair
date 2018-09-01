@@ -155,10 +155,11 @@ class ShopifyController extends Controller
 	{
 		$product_id = "1452081643590";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id);
-		foreach($all_product_details as $product_detail)
-		{
-			dd($product_detail);
-		}
+		dd($all_product_details);
+		// foreach($all_product_details as $product_detail)
+		// {
+		// 	dd($product_detail);
+		// }
 	}
 
 }
