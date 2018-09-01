@@ -193,7 +193,7 @@ class ShopifyController extends Controller
 		$product_id = $_GET['product_id'];
 		$license_key = $_GET['license_key'];
 		
-		$deleting = DB::table('count_license_key')->where('product_id', $product_id )
+		$deleting = DB::table('product_license_key')->where('product_id', $product_id )
 			->where('license_key', $license_key)->delete();
 
 		$shopUrl= session('myshopifyDomain');
