@@ -154,7 +154,7 @@ class ShopifyController extends Controller
 	public function test_function_for_order()
 	{
 		$product_id = "1452081643590";
-		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id);
+		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		dd($all_product_details);
 		// foreach($all_product_details as $product_detail)
 		// {
