@@ -31,11 +31,11 @@
 		</aside>
 		<article>
 			<div class="card">
-				@if($success == 1)
-				<div class="alert success">
+				@if($success == 4)
+				<div class="alert danger">
 					<dl>
-						<dt>Options Updated</dt>
-						<dd>All option are updated successfully.</dd>
+						<dt>Deleted Successfully</dt>
+						<dd>License key deleted successfully.</dd>
 					</dl>
 				</div>
 				@endif

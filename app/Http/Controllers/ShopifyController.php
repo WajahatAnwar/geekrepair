@@ -203,7 +203,7 @@ class ShopifyController extends Controller
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
 		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
 		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
-		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '4']);
 	
 		
 	}
