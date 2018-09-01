@@ -160,11 +160,29 @@ class ShopifyController extends Controller
 	public function test_function_for_order()
 	{
 		$product_id = "1452081643590";
+		$email =  "wajahat@wajahatCo.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
-		dd($all_product_details);
+
 		foreach($all_product_details as $product_detail)
 		{
-			dd($product_detail);
+			$product_id2 = $product_detail['product_id'];
+			$license_key = $product_detail['license_key'];
+			dd($license_key);
+			$validating_license_key = DB::Table('customer_product_keys')
+				->select('product_id', 'license_key', 'customer_email')
+					->where('product_id', $product_id)
+						->where('license_key', $license_key)->get();
+						dd($validating_license_key);
+			if(empty($validating_license_key))
+			{
+				$id = DB::table('customer_product_keys')->insertGetId([
+					'product_id' => $shopify_store_id,
+					'license_key' => $product_id, 
+					'customer_email' => $product_name,
+					'created_at'=> date('Y-m-d H:i:s'), 
+					'updated_at'=> date('Y-m-d H:i:s')
+				]);
+			}
 		}
 	}
 
