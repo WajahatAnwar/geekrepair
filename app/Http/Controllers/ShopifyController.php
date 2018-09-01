@@ -171,11 +171,11 @@ class ShopifyController extends Controller
 			$validating_license_key = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
 					->where('product_id', $product_id)
-						->where('license_key', $license_key)->get();
+						->where('license_key', $license_key)->first();
 	
-			if($validating_license_key)
+			if(empty($validating_license_key))
 			{
-				dd("validationg");
+				
 				$id = DB::table('customer_product_keys')->insertGetId([
 					'product_id' => $shopify_store_id,
 					'license_key' => $product_id, 
@@ -183,6 +183,7 @@ class ShopifyController extends Controller
 					'created_at'=> date('Y-m-d H:i:s'), 
 					'updated_at'=> date('Y-m-d H:i:s')
 				]);
+				dd("validationg");
 			}
 		}
 	}
