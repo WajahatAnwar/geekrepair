@@ -3,8 +3,7 @@
 @section('content')
 	<header style="background-color: #5e8f3f;color: #ffffff;">
 		<img src="{{ asset('carrer.png') }}" alt="logo of stack apps" style="width:45px;">
-        <h1>Stack Apps</h1>
-        <h2>A Simple App which get you sales</h2>
+        <h1>Geek Repair Store</h1>
     </header>
 	</br>
 	<!-- <section>
