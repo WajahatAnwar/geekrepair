@@ -88,6 +88,7 @@ class WebhookController extends Controller
 							'updated_at'=> date('Y-m-d H:i:s')
 						]);
 						$this->send($email, $license_key);
+						return false;
 					}
 				}
 			}
@@ -107,6 +108,5 @@ class WebhookController extends Controller
 
 		$response = Mail::to($email)->send(new GeekEmail($objDemo));
 		Log::info('Congratulations! Email Sent.');
-		dd($response);
 	}
 }
