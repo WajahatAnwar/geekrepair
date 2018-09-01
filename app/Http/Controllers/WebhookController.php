@@ -49,18 +49,13 @@ class WebhookController extends Controller
 			$order_id = $payload['id'];
 			$email = $payload['contact_email'];
 			$product_id = $payload['line_items']['0']["product_id"];
-			// Log::info($payload);
-			// Log::info($order_id);
-
-			// Log::info($product_id);
 			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
-			
-			// Log::info($order_id);
+			Log::info("Hook Called");
 			$email_sent = true;
-			// Log::info($all_product_details);
 			foreach($all_product_details as $product_detail)
 			{
+				Log::info("Loop Called");
 				$product_id2 = $product_detail->product_id;
 				$license_key = $product_detail->license_key;
 				$resold = $product_detail->resold;
@@ -68,8 +63,6 @@ class WebhookController extends Controller
 				$license_key_count = DB::Table('customer_product_keys')
 					->select('product_id', 'license_key', 'customer_email')
 							->where('license_key', $license_key)->count();
-
-				// dd($license_key_count);
 				if($license_key_count < $resold)
 				{
 					$validating_license_key = DB::Table('customer_product_keys')
