@@ -49,6 +49,10 @@ class WebhookController extends Controller
 			$order_id = $payload['id'];
 			$contact_email = $payload['contact_email'];
 			$product_id = $payload['line_items']['0']["id"];
+
+			Log::info($order_id);
+			Log::info($contact_email);
+			Log::info($product_id);
 			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		
