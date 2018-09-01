@@ -44,7 +44,9 @@ class WebhookController extends Controller
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
-	        
+			
+			Log::info($data);
+			die();
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$contact_email = $payload['contact_email'];
@@ -62,6 +64,7 @@ class WebhookController extends Controller
 					->select('product_id', 'license_key', 'customer_email')
 							->where('license_key', $license_key)->count();
 
+				// dd($license_key_count);
 				if($license_key_count < $resold)
 				{
 					$validating_license_key = DB::Table('customer_product_keys')
@@ -83,7 +86,7 @@ class WebhookController extends Controller
 					}
 				}
 			}
-			// return new Response('Webhook Handled', 200);
+			return new Response('Webhook Handled', 200);
 	    } else {
 	        Log::info('Webhook Request was not verified.');
 	    }
