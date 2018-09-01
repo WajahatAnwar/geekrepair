@@ -10,8 +10,11 @@ use App\Shop;
 use App\Mail\GeekEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Oseintow\Shopify\Facades\Shopify;
 use Symfony\Component\HttpFoundation\Response;
+use Oseintow\Shopify\Shopify;
+use App\Objects\ShopifyWebhook;
+use Oseintow\Shopify\Exceptions\ShopifyApiException;
+use App\ShopInfo;
 
 class WebhookController extends Controller
 {
@@ -56,7 +59,11 @@ class WebhookController extends Controller
 				$product_id2 = $product_detail->product_id;
 				$license_key = $product_detail->license_key;
 				$resold = $product_detail->resold;
-
+				Log::info($resold);
+				Log::info($product_id2);
+				Log::info($license_key);
+				die();
+				
 				$license_key_count = DB::Table('customer_product_keys')
 					->select('product_id', 'license_key', 'customer_email')
 							->where('license_key', $license_key)->count();
