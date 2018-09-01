@@ -90,6 +90,7 @@ class WebhookController extends Controller
 	        Log::info('Webhook Request was not verified.');
 	    }
 	}
+	
 	public function send($email, $license_key)
     {
         $objDemo = new \stdClass();
