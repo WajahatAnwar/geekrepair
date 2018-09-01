@@ -95,6 +95,7 @@
 						<th>Product Name</th>
 						<th>License Key</th>
 						<th>Key Resold</th>
+						<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -105,6 +106,7 @@
 									<td><a href="#">{{ $license_key->product_name }}</a></td>
 									<td><a href="#">{{ $license_key->license_key }}</a></td>
 									<td><a href="#">{{ $license_key->resold }}</a></td>
+									<td><a href="https://app.geekrepair.nl/delete_license?product_id={{ $license_key->product_id }}&license_key={{ $license_key->license_key }}" class="button secondary icon-trash"></a></td>
 								</tr>
 							@endforeach
 						@endif

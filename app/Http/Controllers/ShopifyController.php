@@ -155,11 +155,10 @@ class ShopifyController extends Controller
 		$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
 					->setAccessToken($shop->access_token)
 					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
-				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
-    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, 'success' => '2']);
-
-				$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
-    			return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);	}
+		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);	
+	}
 
 	public function count_resold_license_keys()
 	{
@@ -178,59 +177,89 @@ class ShopifyController extends Controller
 				'updated_at'=> date('Y-m-d H:i:s')
 			]);
 		}
-	}
 
-	public function test_function_for_order()
+		$shopUrl= session('myshopifyDomain');
+		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
+		$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
+					->setAccessToken($shop->access_token)
+					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
+		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);
+
+	}
+	public function delete_license()
 	{
-		$product_id = "1452081643590";
-		$email =  "mr.wajahatanwar@gmail.com";
-		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
+		$product_id = $_GET['product_id'];
+		$license_key = $_GET['license_key'];
 		
-		foreach($all_product_details as $product_detail)
-		{
-			$product_id2 = $product_detail->product_id;
-			$license_key = $product_detail->license_key;
-			$resold = $product_detail->resold;
+		$deleting = DB::table('count_license_key')->where('product_id', $product_id )
+			->where('license_key', $license_key)->delete();
 
-			$license_key_count = DB::Table('customer_product_keys')
-				->select('product_id', 'license_key', 'customer_email')
-						->where('license_key', $license_key)->count();
-
-			// dd($license_key_count);
-			if($license_key_count < $resold)
-			{
-				$validating_license_key = DB::Table('customer_product_keys')
-				->select('product_id', 'license_key', 'customer_email')
-					->where('product_id', $product_id)
-						->where('license_key', $license_key)
-							->where('customer_email', $email)->first();
+		$shopUrl= session('myshopifyDomain');
+		$shop = Shop::where('myshopify_domain' , $shopUrl)->first();
+		$shopProducts = $this->shopify->setShopUrl($shop->myshopify_domain)
+					->setAccessToken($shop->access_token)
+					->get('admin/products.json',[ 'limit' => 250 , 'page' => 1 ]);
+		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
+		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, 'success' => '2']);
 	
-				if(empty($validating_license_key))
-				{
-					$id = DB::table('customer_product_keys')->insertGetId([
-						'product_id' => $product_id,
-						'license_key' => $license_key, 
-						'customer_email' => $email,
-						'created_at'=> date('Y-m-d H:i:s'), 
-						'updated_at'=> date('Y-m-d H:i:s')
-					]);
-					$this->send($email, $license_key);
-					dd("done");
-				}
-			}
-		}
+		
 	}
 
-	public function send($email, $license_key)
-    {
-        $objDemo = new \stdClass();
-        $objDemo->email = $email;
-        $objDemo->license_key = $license_key;
-        $objDemo->sender = 'Geek Repair Store';
-        $objDemo->receiver = 'Valuable Customer';
 
-		$respnse = Mail::to($email)->send(new GeekEmail($objDemo));
-		dd($respnse);
-	}
+	// public function test_function_for_order()
+	// {
+	// 	$product_id = "1452081643590";
+	// 	$email =  "mr.wajahatanwar@gmail.com";
+	// 	$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
+		
+	// 	foreach($all_product_details as $product_detail)
+	// 	{
+	// 		$product_id2 = $product_detail->product_id;
+	// 		$license_key = $product_detail->license_key;
+	// 		$resold = $product_detail->resold;
+
+	// 		$license_key_count = DB::Table('customer_product_keys')
+	// 			->select('product_id', 'license_key', 'customer_email')
+	// 					->where('license_key', $license_key)->count();
+
+	// 		// dd($license_key_count);
+	// 		if($license_key_count < $resold)
+	// 		{
+	// 			$validating_license_key = DB::Table('customer_product_keys')
+	// 			->select('product_id', 'license_key', 'customer_email')
+	// 				->where('product_id', $product_id)
+	// 					->where('license_key', $license_key)
+	// 						->where('customer_email', $email)->first();
+	
+	// 			if(empty($validating_license_key))
+	// 			{
+	// 				$id = DB::table('customer_product_keys')->insertGetId([
+	// 					'product_id' => $product_id,
+	// 					'license_key' => $license_key, 
+	// 					'customer_email' => $email,
+	// 					'created_at'=> date('Y-m-d H:i:s'), 
+	// 					'updated_at'=> date('Y-m-d H:i:s')
+	// 				]);
+	// 				$this->send($email, $license_key);
+	// 				dd("done");
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	// public function send($email, $license_key)
+    // {
+    //     $objDemo = new \stdClass();
+    //     $objDemo->email = $email;
+    //     $objDemo->license_key = $license_key;
+    //     $objDemo->sender = 'Geek Repair Store';
+    //     $objDemo->receiver = 'Valuable Customer';
+
+	// 	$respnse = Mail::to($email)->send(new GeekEmail($objDemo));
+	// 	dd($respnse);
+	// }
 
 }
