@@ -175,7 +175,6 @@ class ShopifyController extends Controller
 	
 			if(empty($validating_license_key))
 			{
-				
 				$id = DB::table('customer_product_keys')->insertGetId([
 					'product_id' => $product_id,
 					'license_key' => $license_key, 
