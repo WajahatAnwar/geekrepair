@@ -90,7 +90,7 @@ class WebhookController extends Controller
 	        Log::info('Webhook Request was not verified.');
 	    }
 	}
-	
+
 	public function send($email, $license_key)
     {
         $objDemo = new \stdClass();
@@ -99,6 +99,8 @@ class WebhookController extends Controller
         $objDemo->sender = 'Geek Repair Store';
         $objDemo->receiver = 'Valuable Customer';
 
-		Mail::to($email)->send(new GeekEmail($objDemo));
+		$response = Mail::to($email)->send(new GeekEmail($objDemo));
+		Log::info('Congratulations! Email Sent.');
+		dd($response);
 	}
 }
