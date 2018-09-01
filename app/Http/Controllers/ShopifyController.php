@@ -183,9 +183,7 @@ class ShopifyController extends Controller
 					'created_at'=> date('Y-m-d H:i:s'), 
 					'updated_at'=> date('Y-m-d H:i:s')
 				]);
-				dd("validationg");
-			}else{
-				dd("Not Empty Fuck yeah");
+				return false;
 			}
 		}
 	}
