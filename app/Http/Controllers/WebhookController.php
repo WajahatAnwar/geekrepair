@@ -84,7 +84,7 @@ class WebhookController extends Controller
 							]);
 							
 							$this->send($email, $license_key);
-							$email_sent = false;
+							break 2;
 						}else{
 							Log::info("Email Already Sent");
 							return false;
@@ -108,5 +108,6 @@ class WebhookController extends Controller
 
 		$response = Mail::to($email)->send(new GeekEmail($objDemo));
 		Log::info('Congratulations! Email Sent.');
+		die();
 	}
 }
