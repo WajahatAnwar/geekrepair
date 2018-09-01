@@ -209,7 +209,8 @@ class ShopifyController extends Controller
         $objDemo->sender = 'Geek Repair Store';
         $objDemo->receiver = 'Valuable Customer';
 
-		Mail::to($email)->send(new GeekEmail($objDemo));
+		$respnse = Mail::to($email)->send(new GeekEmail($objDemo));
+		dd($respnse);
 	}
 
 }
