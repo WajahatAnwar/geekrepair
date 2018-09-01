@@ -162,17 +162,19 @@ class ShopifyController extends Controller
 		$product_id = "1452081643590";
 		$email =  "wajahat@wajahatCo.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
-		$license_key_count = DB::Table('customer_product_keys')
-				->select('product_id', 'license_key', 'customer_email')
-						->where('license_key', $license_key)->count();
-
-		dd($license_key_count);
+		
 
 		foreach($all_product_details as $product_detail)
 		{
 			$product_id2 = $product_detail->product_id;
 			$license_key = $product_detail->license_key;
 
+			$license_key_count = DB::Table('customer_product_keys')
+				->select('product_id', 'license_key', 'customer_email')
+						->where('license_key', $license_key)->count();
+
+			dd($license_key_count);
+			
 			$validating_license_key = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
 					->where('product_id', $product_id)
