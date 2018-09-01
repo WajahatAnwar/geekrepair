@@ -155,7 +155,7 @@ class ShopifyController extends Controller
 	{
 		$product_id = "1452081643590";
 		$all_product_details = DB::Table('product_license_key')->where('product_id', $product_id );
-		dd($all_product_details);
+		print_r($all_product_details);
 	}
 
 }
