@@ -7,7 +7,9 @@ use App\Setting;
 use App\Objects\ScriptTag;
 use Log;
 use App\Shop;
+use App\Mail\GeekEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Oseintow\Shopify\Facades\Shopify;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -79,7 +81,7 @@ class WebhookController extends Controller
 							'created_at'=> date('Y-m-d H:i:s'), 
 							'updated_at'=> date('Y-m-d H:i:s')
 						]);
-						dd("done");
+						$this->send($email, $license_key);
 					}
 				}
 			}
@@ -87,6 +89,15 @@ class WebhookController extends Controller
 	    } else {
 	        Log::info('Webhook Request was not verified.');
 	    }
+	}
+	public function send($email, $license_key)
+    {
+        $objDemo = new \stdClass();
+        $objDemo->email = $email;
+        $objDemo->license_key = $license_key;
+        $objDemo->sender = 'Geek Repair Store';
+        $objDemo->receiver = 'Valuable Customer';
 
-    }
+		Mail::to($email)->send(new GeekEmail($objDemo));
+	}
 }
