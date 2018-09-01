@@ -160,7 +160,7 @@ class ShopifyController extends Controller
 	public function test_function_for_order()
 	{
 		$product_id = "1452081643590";
-		$email =  "wajahat@gmail.com";
+		$email =  "wajahat@cmail.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		
 
@@ -168,29 +168,32 @@ class ShopifyController extends Controller
 		{
 			$product_id2 = $product_detail->product_id;
 			$license_key = $product_detail->license_key;
+			$resold = $product_detail->resold;
 
 			$license_key_count = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
 						->where('license_key', $license_key)->count();
 
-			dd($license_key_count);
-
-			$validating_license_key = DB::Table('customer_product_keys')
+			// dd($license_key_count);
+			if($license_key_count < $resold)
+			{
+				$validating_license_key = DB::Table('customer_product_keys')
 				->select('product_id', 'license_key', 'customer_email')
 					->where('product_id', $product_id)
 						->where('license_key', $license_key)
 							->where('customer_email', $email)->first();
 	
-			if(empty($validating_license_key))
-			{
-				$id = DB::table('customer_product_keys')->insertGetId([
-					'product_id' => $product_id,
-					'license_key' => $license_key, 
-					'customer_email' => $email,
-					'created_at'=> date('Y-m-d H:i:s'), 
-					'updated_at'=> date('Y-m-d H:i:s')
-				]);
-				dd("done");
+				if(empty($validating_license_key))
+				{
+					$id = DB::table('customer_product_keys')->insertGetId([
+						'product_id' => $product_id,
+						'license_key' => $license_key, 
+						'customer_email' => $email,
+						'created_at'=> date('Y-m-d H:i:s'), 
+						'updated_at'=> date('Y-m-d H:i:s')
+					]);
+					dd("done");
+				}
 			}
 		}
 	}
