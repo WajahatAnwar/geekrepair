@@ -163,7 +163,6 @@ class ShopifyController extends Controller
 		$email =  "wajahat@gmail.com";
 		$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 		
-
 		foreach($all_product_details as $product_detail)
 		{
 			$product_id2 = $product_detail->product_id;

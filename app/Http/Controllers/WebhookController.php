@@ -49,13 +49,41 @@ class WebhookController extends Controller
 			$contact_email = $payload['contact_email'];
 			$product_id = $payload['line_items']['0']["id"];
 			
-			DB::Table('product_license_key')->where('product_id', $product_id );
-			
-	    	// $shop = Shop::where('shopify_id' , $payload['id'])->first();
-	    	// $shop->delete();
-	    	// Log::info('Webhook Request verified and Handled.');
-	    	return new Response('Webhook Handled', 200);
+			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
+		
+			foreach($all_product_details as $product_detail)
+			{
+				$product_id2 = $product_detail->product_id;
+				$license_key = $product_detail->license_key;
+				$resold = $product_detail->resold;
 
+				$license_key_count = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+							->where('license_key', $license_key)->count();
+
+				// dd($license_key_count);
+				if($license_key_count < $resold)
+				{
+					$validating_license_key = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+						->where('product_id', $product_id)
+							->where('license_key', $license_key)
+								->where('customer_email', $email)->first();
+		
+					if(empty($validating_license_key))
+					{
+						$id = DB::table('customer_product_keys')->insertGetId([
+							'product_id' => $product_id,
+							'license_key' => $license_key, 
+							'customer_email' => $email,
+							'created_at'=> date('Y-m-d H:i:s'), 
+							'updated_at'=> date('Y-m-d H:i:s')
+						]);
+						dd("done");
+					}
+				}
+			}
+			return new Response('Webhook Handled', 200);
 	    } else {
 	        Log::info('Webhook Request was not verified.');
 	    }
