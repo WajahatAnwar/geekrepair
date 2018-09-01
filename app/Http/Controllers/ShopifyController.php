@@ -177,9 +177,9 @@ class ShopifyController extends Controller
 			{
 				
 				$id = DB::table('customer_product_keys')->insertGetId([
-					'product_id' => $shopify_store_id,
-					'license_key' => $product_id, 
-					'customer_email' => $product_name,
+					'product_id' => $product_id,
+					'license_key' => $license_key, 
+					'customer_email' => $email,
 					'created_at'=> date('Y-m-d H:i:s'), 
 					'updated_at'=> date('Y-m-d H:i:s')
 				]);
