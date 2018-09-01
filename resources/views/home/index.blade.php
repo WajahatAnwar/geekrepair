@@ -120,6 +120,7 @@
 		<aside>
   			<h2>Resold Count</h2>
 			<p>This list shows how many times a license key resold</p>
+			<a href="https://app.geekrepair.nl/count" class="button">Count</a>
 		</aside>
 		<article>
 			<div class="card">
