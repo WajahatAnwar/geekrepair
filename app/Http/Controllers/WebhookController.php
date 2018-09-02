@@ -50,7 +50,8 @@ class WebhookController extends Controller
 			$email = $payload['contact_email'];
 			$product_id = $payload['line_items']['0']["product_id"];
 			$quantity = $payload['line_items']['0']["quantity"];
-			
+			$keys = array();
+
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 			Log::info("Hook Called");
 			$email_sent = true;
@@ -58,7 +59,6 @@ class WebhookController extends Controller
 				Log::info("Loop Called");
 				$license_key = $all_product_details[$i]->license_key;
 				$resold = $all_product_details[$i]->resold;
-				// $resold = $product_detail->resold;
 
 				$license_key_count = DB::Table('customer_product_keys')
 					->select('product_id', 'license_key', 'customer_email')
@@ -76,16 +76,16 @@ class WebhookController extends Controller
 						if($email_sent)
 						{
 							$id = DB::table('customer_product_keys')->insertGetId([
-								'product_id' => $product_id,
-								'license_key' => $license_key, 
-								'customer_email' => $email,
-								'created_at'=> date('Y-m-d H:i:s'), 
-								'updated_at'=> date('Y-m-d H:i:s')
+								'product_id' 	=> $product_id,
+								'license_key' 	=> $license_key, 
+								'customer_email'=> $email,
+								'created_at'	=> date('Y-m-d H:i:s'), 
+								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
-							
-							$this->send($email, $license_key);
-							if($i >= $quantity)
+							$license_key2 = array_push($keys, $license_key);
+							if($i >= ($quantity-1))
 							{
+								$this->send($email, $license_key2);
 								break 1;
 							}
 						}else{
