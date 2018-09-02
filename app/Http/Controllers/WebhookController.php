@@ -56,8 +56,8 @@ class WebhookController extends Controller
 			$email_sent = true;
 			for ($i=0; $i < $quantity ; $i++) { 
 				Log::info("Loop Called");
-				$license_key = $all_product_details[$i]['license_key'];
-				$resold = $all_product_details[$i]['resold'];
+				$license_key = $all_product_details[$i]->license_key;
+				$resold = $all_product_details[$i]->resold;
 				// $resold = $product_detail->resold;
 
 				$license_key_count = DB::Table('customer_product_keys')
