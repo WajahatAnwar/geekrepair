@@ -44,55 +44,56 @@ class WebhookController extends Controller
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
-			
+			Log::info("Hook Called");
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$email = $payload['contact_email'];
-			Log::info($payload['line_items']);
-			dd($payload['line_items']);
-			$product_id = $payload['line_items']['0']["product_id"];
-			
-			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
-			Log::info("Hook Called");
-			$email_sent = true;
-			foreach($all_product_details as $product_detail)
-			{
-				Log::info("Loop Called");
-				$product_id2 = $product_detail->product_id;
-				$license_key = $product_detail->license_key;
-				$resold = $product_detail->resold;
+			$line_item = $payload['line_items'];
 
-				$license_key_count = DB::Table('customer_product_keys')
-					->select('product_id', 'license_key', 'customer_email')
-							->where('license_key', $license_key)->count();
-				if($license_key_count < $resold)
-				{
-					$validating_license_key = DB::Table('customer_product_keys')
-					->select('product_id', 'license_key', 'customer_email')
-						->where('product_id', $product_id)
-							->where('license_key', $license_key)
-								->where('customer_email', $email)->first();
-		
-					if(empty($validating_license_key))
-					{
-						if($email_sent)
-						{
-							// $id = DB::table('customer_product_keys')->insertGetId([
-							// 	'product_id' => $product_id,
-							// 	'license_key' => $license_key, 
-							// 	'customer_email' => $email,
-							// 	'created_at'=> date('Y-m-d H:i:s'), 
-							// 	'updated_at'=> date('Y-m-d H:i:s')
-							// ]);
-							
-							// $this->send($email, $license_key);
-							break 1;
-						}else{
-							Log::info("Email Already Sent");
-							return false;
-						}
-					}
-				}
+			foreach($line_item as $product)
+			{
+				Log::info($product->product_id);
+				// $all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product)->get();
+			
+				// $email_sent = true;
+				// foreach($all_product_details as $product_detail)
+				// {
+				// 	Log::info("Loop Called");
+				// 	$license_key = $product_detail->license_key;
+				// 	$resold = $product_detail->resold;
+	
+				// 	$license_key_count = DB::Table('customer_product_keys')
+				// 		->select('product_id', 'license_key', 'customer_email')
+				// 				->where('license_key', $license_key)->count();
+				// 	if($license_key_count < $resold)
+				// 	{
+				// 		$validating_license_key = DB::Table('customer_product_keys')
+				// 		->select('product_id', 'license_key', 'customer_email')
+				// 			->where('product_id', $product_id)
+				// 				->where('license_key', $license_key)
+				// 					->where('customer_email', $email)->first();
+			
+				// 		if(empty($validating_license_key))
+				// 		{
+				// 			if($email_sent)
+				// 			{
+				// 				$id = DB::table('customer_product_keys')->insertGetId([
+				// 					'product_id' => $product_id,
+				// 					'license_key' => $license_key, 
+				// 					'customer_email' => $email,
+				// 					'created_at'=> date('Y-m-d H:i:s'), 
+				// 					'updated_at'=> date('Y-m-d H:i:s')
+				// 				]);
+								
+				// 				$this->send($email, $license_key);
+				// 				break 1;
+				// 			}else{
+				// 				Log::info("Email Already Sent");
+				// 				return false;
+				// 			}
+				// 		}
+				// 	}
+				// }
 			}
 			return new Response('Webhook Handled', 200);
 	    } else {
