@@ -6,7 +6,7 @@ $license_array = $geek->license_key;
 $counting = count($license_array);
 ?>
 @for($i = 0; $i < $counting; $i++)
-<h2><strong>{{ $license[$i] }}</strong></h2>
+<h2><strong>{{ $license_array[$i] }}</strong></h2>
 @endfor
 <p><u>Values passed by With method:</u></p>
  
