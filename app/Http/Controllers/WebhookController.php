@@ -48,6 +48,8 @@ class WebhookController extends Controller
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$email = $payload['contact_email'];
+			Log::info($payload['line_items']);
+			dd($payload['line_items']);
 			$product_id = $payload['line_items']['0']["product_id"];
 			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
@@ -75,15 +77,15 @@ class WebhookController extends Controller
 					{
 						if($email_sent)
 						{
-							$id = DB::table('customer_product_keys')->insertGetId([
-								'product_id' => $product_id,
-								'license_key' => $license_key, 
-								'customer_email' => $email,
-								'created_at'=> date('Y-m-d H:i:s'), 
-								'updated_at'=> date('Y-m-d H:i:s')
-							]);
+							// $id = DB::table('customer_product_keys')->insertGetId([
+							// 	'product_id' => $product_id,
+							// 	'license_key' => $license_key, 
+							// 	'customer_email' => $email,
+							// 	'created_at'=> date('Y-m-d H:i:s'), 
+							// 	'updated_at'=> date('Y-m-d H:i:s')
+							// ]);
 							
-							$this->send($email, $license_key);
+							// $this->send($email, $license_key);
 							break 1;
 						}else{
 							Log::info("Email Already Sent");
