@@ -89,23 +89,35 @@ class WebhookController extends Controller
 							// }
 					}else
 					{
-						$email_sent = true;
+						$id = DB::table('customer_withno_keys')->insertGetId([
+							'product_name' 	=> $product_name,
+							'license_key' 	=> $license_key, 
+							'customer_email'=> $email,
+							'created_at'	=> date('Y-m-d H:i:s'), 
+							'updated_at'	=> date('Y-m-d H:i:s')
+						]);	
 					}
 				}else
 				{
-					$email_sent = true;
+					$id = DB::table('customer_withno_keys')->insertGetId([
+						'product_name' 	=> $product_name,
+						'license_key' 	=> $license_key, 
+						'customer_email'=> $email,
+						'created_at'	=> date('Y-m-d H:i:s'), 
+						'updated_at'	=> date('Y-m-d H:i:s')
+					]);	
 				}
 			}
-			if($email_sent)
-			{
-				$id = DB::table('customer_withno_keys')->insertGetId([
-					'product_name' 	=> $product_name,
-					'license_key' 	=> $license_key, 
-					'customer_email'=> $email,
-					'created_at'	=> date('Y-m-d H:i:s'), 
-					'updated_at'	=> date('Y-m-d H:i:s')
-				]);	
-			}
+			// if($email_sent)
+			// {
+			// 	$id = DB::table('customer_withno_keys')->insertGetId([
+			// 		'product_name' 	=> $product_name,
+			// 		'license_key' 	=> $license_key, 
+			// 		'customer_email'=> $email,
+			// 		'created_at'	=> date('Y-m-d H:i:s'), 
+			// 		'updated_at'	=> date('Y-m-d H:i:s')
+			// 	]);	
+			// }
 			return new Response('Webhook Handled', 200);
 	    } else {
 	        Log::info('Webhook Request was not verified.');
