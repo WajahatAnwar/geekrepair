@@ -50,9 +50,9 @@ class WebhookController extends Controller
 			$email = $payload['contact_email'];
 			$line_item = $payload['line_items'];
 
-			foreach($line_item as $product)
-			{
-				Log::info($product->product_id);
+			// foreach($line_item as $product)
+			// {
+				// Log::info($product->product_id);
 				// $all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product)->get();
 			
 				// $email_sent = true;
@@ -94,7 +94,7 @@ class WebhookController extends Controller
 				// 		}
 				// 	}
 				// }
-			}
+			// }
 			return new Response('Webhook Handled', 200);
 	    } else {
 	        Log::info('Webhook Request was not verified.');
