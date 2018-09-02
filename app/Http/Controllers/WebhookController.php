@@ -50,8 +50,7 @@ class WebhookController extends Controller
 			$email = $payload['contact_email'];
 			$product_id = $payload['line_items']['0']["product_id"];
 			$quantity = $payload['line_items']['0']["quantity"];
-			$keys = array();
-
+			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 			Log::info("Hook Called");
 			$email_sent = true;
@@ -82,12 +81,10 @@ class WebhookController extends Controller
 								'created_at'	=> date('Y-m-d H:i:s'), 
 								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
-							$license_key2 = array_push($keys, $license_key);
-							if($i == ($quantity-1) || true)
+							
+							$this->send($email, $license_key);
+							if($i >= $quantity)
 							{
-								// $things = $quantity ;
-								Log::info("quantity:".$i."-".$quantity);
-								$this->send($email, $license_key2);
 								break 1;
 							}
 						}else{
