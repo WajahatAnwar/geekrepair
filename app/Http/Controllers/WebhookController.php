@@ -83,8 +83,9 @@ class WebhookController extends Controller
 								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
 							$license_key2 = array_push($keys, $license_key);
-							if($i >= ($quantity-1))
+							if($i == ($quantity-1) || true)
 							{
+								Log::info("quantity:".$i."-".$quantity-1);
 								$this->send($email, $license_key2);
 								break 1;
 							}
