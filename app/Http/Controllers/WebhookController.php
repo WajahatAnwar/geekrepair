@@ -56,44 +56,44 @@ class WebhookController extends Controller
 			$email_sent = true;
 			for ($i=0; $i < $quantity ; $i++) { 
 				Log::info("Loop Called");
-				// $license_key = $all_product_details[$i]->license_key;
-				// $resold = $all_product_details[$i]->resold;
-				// // $resold = $product_detail->resold;
+				$license_key = $all_product_details[$i]->license_key;
+				$resold = $all_product_details[$i]->resold;
+				// $resold = $product_detail->resold;
 
-				// $license_key_count = DB::Table('customer_product_keys')
-				// 	->select('product_id', 'license_key', 'customer_email')
-				// 			->where('license_key', $license_key)->count();
-				// if($license_key_count < $resold)
-				// {
-				// 	$validating_license_key = DB::Table('customer_product_keys')
-				// 	->select('product_id', 'license_key', 'customer_email')
-				// 		->where('product_id', $product_id)
-				// 			->where('license_key', $license_key)
-				// 				->where('customer_email', $email)->first();
+				$license_key_count = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+							->where('license_key', $license_key)->count();
+				if($license_key_count < $resold)
+				{
+					$validating_license_key = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+						->where('product_id', $product_id)
+							->where('license_key', $license_key)
+								->where('customer_email', $email)->first();
 		
-				// 	if(empty($validating_license_key))
-				// 	{
-				// 		if($email_sent)
-				// 		{
-				// 			$id = DB::table('customer_product_keys')->insertGetId([
-				// 				'product_id' => $product_id,
-				// 				'license_key' => $license_key, 
-				// 				'customer_email' => $email,
-				// 				'created_at'=> date('Y-m-d H:i:s'), 
-				// 				'updated_at'=> date('Y-m-d H:i:s')
-				// 			]);
+					if(empty($validating_license_key))
+					{
+						if($email_sent)
+						{
+							$id = DB::table('customer_product_keys')->insertGetId([
+								'product_id' => $product_id,
+								'license_key' => $license_key, 
+								'customer_email' => $email,
+								'created_at'=> date('Y-m-d H:i:s'), 
+								'updated_at'=> date('Y-m-d H:i:s')
+							]);
 							
-				// 			$this->send($email, $license_key);
-				// 			if($i >= $quantity)
-				// 			{
-				// 				break 1;
-				// 			}
-				// 		}else{
-				// 			Log::info("Email Already Sent");
-				// 			return false;
-				// 		}
-				// 	}
-				// }
+							$this->send($email, $license_key);
+							if($i >= $quantity)
+							{
+								break 1;
+							}
+						}else{
+							Log::info("Email Already Sent");
+							return false;
+						}
+					}
+				}
 			}
 			foreach($all_product_details as $product_detail)
 			{
@@ -114,7 +114,7 @@ class WebhookController extends Controller
         $objDemo->receiver = 'Valuable Customer';
 
 		$response = Mail::to($email)->send(new GeekEmail($objDemo));
-		Log::info('Congratulations! Email Sent.');
-		die();
+		// Log::info('Congratulations! Email Sent.');
+		// die();
 	}
 }
