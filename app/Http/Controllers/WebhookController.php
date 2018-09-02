@@ -83,10 +83,10 @@ class WebhookController extends Controller
 							
 							$this->send($email, $license_key);
 							$email_sent = false;
-							if($i >= $quantity)
-							{
-								break 1;
-							}
+							// if($i >= $quantity)
+							// {
+							// 	break 1;
+							// }
 					}else
 					{
 						$email_sent = true;
