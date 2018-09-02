@@ -85,7 +85,8 @@ class WebhookController extends Controller
 							$license_key2 = array_push($keys, $license_key);
 							if($i == ($quantity-1) || true)
 							{
-								Log::info("quantity:".$i."-".$quantity-1);
+								// $things = $quantity ;
+								Log::info("quantity:".$i."-".$quantity);
 								$this->send($email, $license_key2);
 								break 1;
 							}
