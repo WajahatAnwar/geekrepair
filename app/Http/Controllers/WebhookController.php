@@ -49,7 +49,7 @@ class WebhookController extends Controller
 			$order_id = $payload['id'];
 			$email = $payload['contact_email'];
 			$line_item = $payload['line_items'];
-
+			Log::infor($line_item);
 			// foreach($line_item as $product)
 			// {
 				// Log::info($product->product_id);
