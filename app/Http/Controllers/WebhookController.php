@@ -88,6 +88,9 @@ class WebhookController extends Controller
 								break 1;
 							}
 					}
+				}else
+				{
+					$email_sent = true;
 				}
 			}
 			if($email_sent)
