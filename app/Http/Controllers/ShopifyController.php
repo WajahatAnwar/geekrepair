@@ -40,7 +40,7 @@ class ShopifyController extends Controller
 				$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
 				$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
     			$customers_withno_keys = DB::table('customer_withno_keys')->select('product_name', 'license_key', 'customer_email', 'reason')->get();
-				return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '4']);
+				return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '0']);
     		}
     		else{
     			$shopify = $this->shopify->setShopUrl($shopUrl);
@@ -159,7 +159,7 @@ class ShopifyController extends Controller
 		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
 		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
 		$customers_withno_keys = DB::table('customer_withno_keys')->select('product_name', 'license_key', 'customer_email', 'reason')->get();
-		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '4']);
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '1']);
 	}
 
 	public function count_resold_license_keys()
@@ -198,7 +198,7 @@ class ShopifyController extends Controller
 		$product_license_key = DB::table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->get();
 		$resold_license_key = DB::table('count_license_key')->select('product_name', 'license_key', 'resold')->get();
 		$customers_withno_keys = DB::table('customer_withno_keys')->select('product_name', 'license_key', 'customer_email', 'reason')->get();
-		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '4']);
+		return view('home.index' , ['shop' => $shop , 'settings' => $shop->settings, "shop_products" => $shopProducts, "product_license_key" => $product_license_key, "resold" => $resold_license_key, "customers_withno_keys" => $customers_withno_keys, 'success' => '0']);
 
 	}
 	public function delete_license()
