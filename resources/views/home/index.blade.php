@@ -130,14 +130,6 @@
 		</aside>
 		<article>
 			<div class="card">
-			@if($success == "5")
-				<div class="alert success">
-					<dl>
-						<dt>License Key Resold Counting Complete</dt>
-						<dd>Below you can see the results</dd>
-					</dl>
-				</div>
-				@endif
 				<h5>Customer Who Didn't Got Keys Email</h5>
 				<table>
 					<thead>
@@ -173,6 +165,14 @@
 		</aside>
 		<article>
 			<div class="card">
+				@if($success == "5")
+				<div class="alert success">
+					<dl>
+						<dt>License Key Resold Counting Complete</dt>
+						<dd>Below you can see the results</dd>
+					</dl>
+				</div>
+				@endif
 				<h5>How many time key Resold</h5>
 				<table>
 					<thead>
