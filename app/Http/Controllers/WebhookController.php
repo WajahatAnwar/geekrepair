@@ -112,7 +112,7 @@ class WebhookController extends Controller
 							'product_name' 	=> $product_name,
 							'license_key' 	=> $license_key, 
 							'customer_email'=> $email,
-							'reason'        => "All Keys are assigned to this user.",
+							'reason'        => "This Key is Already Assigned",
 							'created_at'	=> date('Y-m-d H:i:s'), 
 							'updated_at'	=> date('Y-m-d H:i:s')
 						]);	
