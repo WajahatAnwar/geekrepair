@@ -54,8 +54,25 @@ class WebhookController extends Controller
 			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 			Log::info("Hook Called");
+			$original_array = count($all_product_details);
 			for ($i=0; $i < $quantity ; $i++) 
 			{ 
+				
+				if(($i == $original_array) && ($quantity > $original_array))
+				{
+					$loop_start = $quantity - $original_array;
+					for($p = 0; $p < $loop_start; $p++)
+					{
+						$id = DB::table('customer_withno_keys')->insertGetId([
+							'product_name' 	=> $product_name,
+							'license_key' 	=> "0", 
+							'customer_email'=> $email,
+							'reason'        => "All keys are already assigned. No more keys available.",
+							'created_at'	=> date('Y-m-d H:i:s'), 
+							'updated_at'	=> date('Y-m-d H:i:s')
+						]);	
+					}
+				}
 				Log::info("Loop Called");
 				$license_key = $all_product_details[$i]->license_key;
 				$resold = $all_product_details[$i]->resold;
