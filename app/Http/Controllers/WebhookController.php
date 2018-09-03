@@ -106,7 +106,7 @@ class WebhookController extends Controller
 							// {
 							// 	break 1;
 							// }
-					}else
+					}else if(!empty($validating_license_key))
 					{
 						$id = DB::table('customer_withno_keys')->insertGetId([
 							'product_name' 	=> $product_name,
