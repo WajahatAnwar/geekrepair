@@ -23,10 +23,10 @@
 			</div>
 		</article>
 	</section> -->
-	/*
-		@Array using: $product
-		@Purpose: This section is use to enter the license key.
-	*/
+	<!--
+		@Array using: $product_license_key
+		@Purpose: This section show the list of license key associated with the respective product.
+		-->
 	<section>
 		<aside>
 			<h2>Options</h2>
@@ -75,10 +75,10 @@
 			</div>
 		</article>
 	</section>
-	/*
+	<!--
 		@Array using: $product_license_key
 		@Purpose: This section show the list of license key associated with the respective product.
-	*/
+	-->
 	<section id="">
 		<aside>
   			<h2>List of License Keys</h2>
@@ -122,10 +122,7 @@
 			</div>
 		</article>
 	</section>
-	/*
-		@Array using: $customers_withno_keys
-		@Purpose: This section show the list of user who didn't got an email. Show the reason.
-	*/
+	
 	<section id="">
 		<aside>
   			<h2>Customer Who Didn't Got Keys Email</h2>
@@ -160,10 +157,7 @@
 			</div>
 		</article>
 	</section>
-	/*
-		@Array using: $resold
-		@Purpose: This section show the list that how many times a license key is used. 
-	*/
+	
 	<section id="">
 		<aside>
   			<h2>Resold Count</h2>
@@ -196,35 +190,5 @@
 			</div>
 		</article>
 	</section>
-
-	<script>
-    function store(){
-
-        var btn_text= document.getElementById("btn_text").value;
-        var btn_color= document.getElementById("btn_color").value;
-        var btn_size= document.getElementById("btn_size").value;
-        var pitch_size= document.getElementById("pitch_size").value;
-        var btn_color_hover= document.getElementById("btn_color_hover").value;
-        
-        var testObject = { 'btn_text': btn_text, 'btn_color': btn_color, 'btn_size': btn_size, 'pitch_size': pitch_size, 'btn_color_hover': btn_color_hover };
-        localStorage.setItem('formattributes', JSON.stringify(testObject));
-        
-    }
-
-    var retrievedObject = JSON.parse(localStorage.getItem('formattributes'));
-    
-    var btn_size = retrievedObject.btn_size;
-    var btn_text =retrievedObject.btn_text;
-    var btn_color =retrievedObject.btn_color;
-    var pitch_size =retrievedObject.pitch_size;
-    var btn_color_hover =retrievedObject.btn_color_hover;
-
-    document.getElementById('btn_size').value = btn_size;
-    document.getElementById('btn_color').value = btn_color;
-	document.getElementById('btn_text').value = btn_text;
-	document.getElementById("pitch_size").value = pitch_size;
-	document.getElementById("btn_color_hover").value = btn_color_hover;
-    
-</script>
 
 @endsection
