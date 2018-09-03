@@ -3,7 +3,7 @@
 @section('content')
 	<header style="background-color: #5e8f3f;color: #ffffff;">
 		<img src="{{ asset('carrer.png') }}" alt="logo of stack apps" style="width:45px;">
-        <h1>Geek Repair Store</h1>
+	<h1>Geek Repair Store</h1>
     </header>
 	</br>
 	<!-- <section>
@@ -23,6 +23,10 @@
 			</div>
 		</article>
 	</section> -->
+	/*
+		@Array using: $product
+		@Purpose: This section is use to enter the license key.
+	*/
 	<section>
 		<aside>
 			<h2>Options</h2>
@@ -71,6 +75,10 @@
 			</div>
 		</article>
 	</section>
+	/*
+		@Array using: $product_license_key
+		@Purpose: This section show the list of license key associated with the respective product.
+	*/
 	<section id="">
 		<aside>
   			<h2>List of License Keys</h2>
@@ -114,8 +122,49 @@
 			</div>
 		</article>
 	</section>
-
-		<section id="">
+	/*
+		@Array using: $customers_withno_keys
+		@Purpose: This section show the list of user who didn't got an email. Show the reason.
+	*/
+	<section id="">
+		<aside>
+  			<h2>Customer Who Didn't Got Keys Email</h2>
+			<p>This list shows how many customers didn't got a license key</p>
+			<a href="https://app.geekrepair.nl/count" class="button">Count</a>
+		</aside>
+		<article>
+			<div class="card">
+				<h5>Customer Who Didn't Got Keys Email</h5>
+				<table>
+					<thead>
+						<tr>
+						<th>Product Name</th>
+						<th>License Key</th>
+						<th>Customer Email</th>
+						<th>Reason</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if(!empty($customers_withno_keys))
+							@foreach ($customers_withno_keys as $key)
+								<tr>
+									<td><a href="#">{{ $key->product_name }}</a></td>
+									<td><a href="#">{{ $key->license_key }}</a></td>
+									<td><a href="#">{{ $key->customer_email }}</a></td>
+									<td><a href="#">{{ $key->reason }}</a></td>
+								</tr>
+							@endforeach
+						@endif
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+	/*
+		@Array using: $resold
+		@Purpose: This section show the list that how many times a license key is used. 
+	*/
+	<section id="">
 		<aside>
   			<h2>Resold Count</h2>
 			<p>This list shows how many times a license key resold</p>
