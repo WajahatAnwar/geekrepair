@@ -13,6 +13,7 @@ Beste,
 Bedankt voor je aankoop. Wij zullen deze met de grootste precisie behandelen om ervoor te zorgen dat jij tevreden bent met je product. 
 Hierbij de licenties die je aangeschaft hebt:
 
+<h1>{{ $geek->product_name }}</h1>
 <h2><strong>{{ $geek->license_key }}</strong></h2>
 
 Voor de installatiehandleiding en software van je producten kan je terecht op onze website <a href="www.geekrepair.nl">www.geekrepair.nl</a> of klik <a href="www.geekrepair.nl/pages/downloads">hier</a>

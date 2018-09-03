@@ -81,7 +81,7 @@ class WebhookController extends Controller
 								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
 							
-							$this->send($email, $license_key);
+							$this->send($email, $license_key, $product_name);
 							$email_sent = false;
 							// if($i >= $quantity)
 							// {
@@ -126,11 +126,12 @@ class WebhookController extends Controller
 	    }
 	}
 
-	public function send($email, $license_key)
+	public function send($email, $license_key, $product_name)
     {
         $objDemo = new \stdClass();
         $objDemo->email = $email;
         $objDemo->license_key = $license_key;
+        $objDemo->product_name = $product_name;
         $objDemo->sender = 'Geek Repair Store';
         $objDemo->receiver = 'Valuable Customer';
 
