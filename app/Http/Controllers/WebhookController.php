@@ -101,11 +101,7 @@ class WebhookController extends Controller
 							]);
 							
 							$this->send($email, $license_key, $product_name);
-							$email_sent = false;
-							// if($i >= $quantity)
-							// {
-							// 	break 1;
-							// }
+
 					}else if(!empty($validating_license_key))
 					{
 						$id = DB::table('customer_withno_keys')->insertGetId([
