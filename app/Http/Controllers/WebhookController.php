@@ -73,6 +73,7 @@ class WebhookController extends Controller
 						]);	
 					}
 					break;
+					Log::info("Break not working");
 				}
 				Log::info("Loop Called");
 				$license_key = $all_product_details[$i]->license_key;
