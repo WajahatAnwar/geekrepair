@@ -44,7 +44,7 @@ class WebhookController extends Controller
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 		$email_sent = true;
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
-			
+			Log::info("Hook Called");
 			$payload = json_decode($data , true);
 			$order_id = $payload['id'];
 			$email = $payload['contact_email'];
@@ -53,7 +53,7 @@ class WebhookController extends Controller
 			$quantity = $payload['line_items']['0']["quantity"];
 			
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
-			Log::info("Hook Called");
+			
 			$original_array = count($all_product_details);
 			for ($i=0; $i < $quantity ; $i++) 
 			{ 
