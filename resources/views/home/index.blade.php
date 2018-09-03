@@ -130,7 +130,7 @@
 		</aside>
 		<article>
 			<div class="card">
-			@if($success == "4")
+			@if($success == "5")
 				<div class="alert success">
 					<dl>
 						<dt>License Key Resold Counting Complete</dt>
