@@ -127,7 +127,6 @@
 		<aside>
   			<h2>Customer Who Didn't Got Keys Email</h2>
 			<p>This list shows how many customers didn't got a license key</p>
-			<a href="https://app.geekrepair.nl/count" class="button">Count</a>
 		</aside>
 		<article>
 			<div class="card">
