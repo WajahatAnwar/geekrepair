@@ -93,6 +93,7 @@ class WebhookController extends Controller
 							'product_name' 	=> $product_name,
 							'license_key' 	=> $license_key, 
 							'customer_email'=> $email,
+							'reason'        => "All Keys are assigned to this user.",
 							'created_at'	=> date('Y-m-d H:i:s'), 
 							'updated_at'	=> date('Y-m-d H:i:s')
 						]);	
@@ -103,6 +104,7 @@ class WebhookController extends Controller
 						'product_name' 	=> $product_name,
 						'license_key' 	=> $license_key, 
 						'customer_email'=> $email,
+						'reason'        => "Can't resold this key more.",
 						'created_at'	=> date('Y-m-d H:i:s'), 
 						'updated_at'	=> date('Y-m-d H:i:s')
 					]);	
