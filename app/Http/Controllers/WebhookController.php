@@ -76,8 +76,24 @@ class WebhookController extends Controller
 					Log::info("Break not working");
 				}
 				Log::info("Loop Called");
-				$license_key = $all_product_details[$i]->license_key;
-				$resold = $all_product_details[$i]->resold;
+				$license_key;
+				$resold;
+				for($x = 0; $x <= $quantity; $x++)
+				{
+					$license_key = $all_product_details[$x]->license_key;
+					$resold = $all_product_details[$x]->resold;
+					$validating_license_key = DB::Table('customer_product_keys')
+					->select('product_id', 'license_key', 'customer_email')
+						->where('product_id', $product_id)
+							->where('license_key', $license_key)
+								->where('customer_email', $email)->first();
+					if(empty($validating_license_key))
+					{
+						Log::info("inner break works");
+						break 1;
+					}
+				}
+				
 
 				$license_key_count = DB::Table('customer_product_keys')
 					->select('product_id', 'license_key', 'customer_email')
