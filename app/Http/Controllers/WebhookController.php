@@ -55,7 +55,7 @@ class WebhookController extends Controller
 			$all_product_details = DB::Table('product_license_key')->select('product_id', 'product_name', 'license_key', 'resold')->where('product_id', $product_id)->get();
 			
 			$original_array = count($all_product_details);
-			for ($i=0; $i < $quantity ; $i++) 
+			for ($i=0; $i <= $quantity ; $i++) 
 			{ 
 				
 				if(($i == $original_array) && ($quantity > $original_array))
@@ -90,7 +90,7 @@ class WebhookController extends Controller
 							->where('license_key', $license_key)
 								->where('customer_email', $email)->first();
 		
-					if(empty($validating_license_key))
+					if(empty($validating_license_key) &&  $quantity < 1)
 					{
 							$id = DB::table('customer_product_keys')->insertGetId([
 								'product_id' 	=> $product_id,
