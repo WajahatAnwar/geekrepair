@@ -102,7 +102,7 @@ class WebhookController extends Controller
 							
 							$this->send($email, $license_key, $product_name);
 
-					}else if(!empty($validating_license_key) &&  $quantity < 1)
+					}else if(!empty($validating_license_key))
 					{
 						$id = DB::table('customer_withno_keys')->insertGetId([
 							'product_name' 	=> $product_name,
