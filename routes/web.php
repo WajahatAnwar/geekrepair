@@ -39,6 +39,6 @@ Route::post('badges_available' , 'ShopifyController@badges_available');
 Route::get('reload' , 'ShopifyController@reload_theme');
 Route::get('test_function_for_order' , 'ShopifyController@test_function_for_order');
 Route::get('mail/send', 'MailController@send');
-Route::get('mail/test_send', 'MailController@test_send');
+Route::get('mail/test_send', 'ShopifyController@test_send');
 Route::get('count', 'ShopifyController@count_resold_license_keys');
 Route::get('delete_license', 'ShopifyController@delete_license');
