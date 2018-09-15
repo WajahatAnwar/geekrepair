@@ -222,6 +222,22 @@ class ShopifyController extends Controller
 		
 	}
 
+	public function test_send()
+    {
+		$objDemo = new \stdClass();
+		$email = "wajahatanwar56@gmail.com";
+		$license_key = array("1231212421", "12124124", "12124124");
+		$product_name = "Fuckit";
+        $objDemo->email = $email;
+        $objDemo->license_key = $license_key;
+        $objDemo->product_name = $product_name;
+        $objDemo->sender = 'Geek Repair Store';
+        $objDemo->receiver = 'Valuable Customer';
+
+		$response = Mail::to($email)->send(new GeekEmail($objDemo));
+		// Log::info('Congratulations! Email Sent.');
+		// die();
+	}
 
 	// public function test_function_for_order()
 	// {
