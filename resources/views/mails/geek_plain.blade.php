@@ -7,7 +7,7 @@
 Thank You,
 <br/>
 <i>{{ $geek->sender }}</i> -->
-
+dd($license);
 <p><strong>Beste</strong></p>
 
 <p>Bedankt voor je aankoop. Wij zullen deze met de grootste precisie behandelen om ervoor te zorgen dat jij tevreden bent met je product. 
