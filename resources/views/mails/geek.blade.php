@@ -1,5 +1,4 @@
 
-<!-- {{ $testVarOne }} -->
 <?php $counting = count($testVarOne); ?>
     @for ($i = 0; $i < $counting; $i++)
         <option value="{{ $testVarOne[$i] }}">{{ $testVarOne[$i] }}</option>
