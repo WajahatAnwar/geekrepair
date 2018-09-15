@@ -1,7 +1,7 @@
 
 <?php $counting = count($testVarOne); ?>
     @for ($i = 0; $i < $counting; $i++)
-        <option value="{{ $testVarOne[$i] }}">{{ $testVarOne[$i] }}</option>
+    <label>{{ $testVarOne[$i] }}</label>
     @endfor
 <p><strong>Beste</strong></p>
 
