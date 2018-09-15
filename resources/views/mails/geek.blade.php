@@ -1,5 +1,9 @@
 
-{{ $testVarOne }}
+<!-- {{ $testVarOne }} -->
+<?php $counting = count($testVarOne); ?>
+    @for ($i = 0; $i < $counting; $i++)
+        <option value="{{ $testVarOne[$i] }}">{{ $testVarOne[$i] }}</option>
+    @endfor
 <p><strong>Beste</strong></p>
 
 <p>Bedankt voor je aankoop. Wij zullen deze met de grootste precisie behandelen om ervoor te zorgen dat jij tevreden bent met je product. 
