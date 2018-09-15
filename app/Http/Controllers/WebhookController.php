@@ -43,6 +43,8 @@ class WebhookController extends Controller
 	    $data = $request->getContent();
 	    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 		$email_sent = true;
+		$passing_array = array();
+
 	    if (Shopify::verifyWebHook($data, $hmacHeader)) {
 			Log::info("Hook Called");
 			$payload = json_decode($data , true);
@@ -115,8 +117,6 @@ class WebhookController extends Controller
 								'created_at'	=> date('Y-m-d H:i:s'), 
 								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
-							
-							$this->send($email, $license_key, $product_name);
 
 					}else if(!empty($validating_license_key))
 					{
@@ -129,6 +129,8 @@ class WebhookController extends Controller
 							'updated_at'	=> date('Y-m-d H:i:s')
 						]);	
 					}
+					// email in one array
+					array_push($passing_array , $license_key);
 				}else
 				{
 					$id = DB::table('customer_withno_keys')->insertGetId([
@@ -141,16 +143,9 @@ class WebhookController extends Controller
 					]);	
 				}
 			}
-			// if($email_sent)
-			// {
-			// 	$id = DB::table('customer_withno_keys')->insertGetId([
-			// 		'product_name' 	=> $product_name,
-			// 		'license_key' 	=> $license_key, 
-			// 		'customer_email'=> $email,
-			// 		'created_at'	=> date('Y-m-d H:i:s'), 
-			// 		'updated_at'	=> date('Y-m-d H:i:s')
-			// 	]);	
-			// }
+			if(count($passing_array) > 0){
+				$this->send($email, $license_key, $product_name);
+			}
 			return new Response('Webhook Handled', 200);
 	    } else {
 	        Log::info('Webhook Request was not verified.');
