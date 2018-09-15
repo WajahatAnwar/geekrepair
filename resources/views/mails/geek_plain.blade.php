@@ -9,7 +9,6 @@
 <p>Bedankt voor je aankoop. Wij zullen deze met de grootste precisie behandelen om ervoor te zorgen dat jij tevreden bent met je product. 
 Hierbij de licenties die je aangeschaft hebt:</p>
 <h1>{{ $geek->product_name }}</h1>
-<h2><strong>{{ $geek->license_key }}</strong></h2>
 
 <p>Voor de installatiehandleiding en software van je producten kan je terecht op onze website <a href="www.geekrepair.nl">www.geekrepair.nl</a> of klik <a href="www.geekrepair.nl/pages/downloads">hier</a> indien je een installatie dvd hebt aangeschaft dan gaat deze dezelfde dag (indien voor 17:00 besteld) nog mee met de post</p>
 
