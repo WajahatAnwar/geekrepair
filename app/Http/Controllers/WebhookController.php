@@ -144,7 +144,7 @@ class WebhookController extends Controller
 				}
 			}
 			if(count($passing_array) > 0){
-				$this->send($email, $license_key, $product_name);
+				$this->send($email, $passing_array, $product_name);
 			}
 			return new Response('Webhook Handled', 200);
 	    } else {
