@@ -124,10 +124,10 @@
 	</section>
 	
 	<section id="">
-		<aside>
+		<!-- <aside>
   			<h2>Customer Who Didn't Got Keys Email</h2>
 			<p>This list shows how many customers didn't got a license key</p>
-		</aside>
+		</aside> -->
 		<article>
 			<div class="card">
 				<h5>Customer Who Didn't Got Keys Email</h5>
