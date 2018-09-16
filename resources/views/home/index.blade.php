@@ -124,45 +124,6 @@
 	</section>
 	
 	<section id="">
-		<!-- <aside>
-  			<h2>Customer Who Didn't Got Keys Email</h2>
-			<p>This list shows how many customers didn't got a license key</p>
-		</aside> -->
-		<article>
-			<div class="card">
-			<div class="loading" style="display: none;">Loading&#8230;</div>
-				<h5>Customer Who Didn't Got Keys Email</h5>
-				<table>
-					<thead>
-						<tr>
-						<th>Product Name</th>
-						<th>License Key</th>
-						<th>Customer Email</th>
-						<th>Reason</th>
-						<th>License Key</th>
-						<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						@if(!empty($customers_withno_keys))
-							@foreach ($customers_withno_keys as $key)
-								<tr>
-									<td><a href="#">{{ $key->product_name }}</a></td>
-									<td><a href="#">{{ $key->license_key }}</a></td>
-									<td><a href="#">{{ $key->customer_email }}</a></td>
-									<td><a href="#">{{ $key->reason }}</a></td>
-									<td><input type="text" placeholder="Enter License Key to Send" id="datainput-{{ $key->id }}" data-email="{{ $key->customer_email }}" data-id="{{ $key->id }}"></td>
-									<td><a href="#" class="button secondary icon-send send_license_key" data-id="{{ $key->id }}" data-email="{{ $key->customer_email }}" data-product="{{ $key->product_name }}">Send</a></td>
-								</tr>
-							@endforeach
-						@endif
-					</tbody>
-				</table>
-			</div>
-		</article>
-	</section>
-	
-	<section id="">
 		<aside>
   			<h2>Resold Count</h2>
 			<p>This list shows how many times a license key resold</p>
@@ -202,5 +163,45 @@
 			</div>
 		</article>
 	</section>
+
+	<section id="">
+		<!-- <aside>
+  			<h2>Customer Who Didn't Got Keys Email</h2>
+			<p>This list shows how many customers didn't got a license key</p>
+		</aside> -->
+		<article>
+			<div class="card">
+			<div class="loading" style="display: none;">Loading&#8230;</div>
+				<h5>Customer Who Didn't Got Keys Email</h5>
+				<table>
+					<thead>
+						<tr>
+						<th>Product Name</th>
+						<th>License Key</th>
+						<th>Customer Email</th>
+						<th>Reason</th>
+						<th>License Key</th>
+						<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if(!empty($customers_withno_keys))
+							@foreach ($customers_withno_keys as $key)
+								<tr>
+									<td><a href="#">{{ $key->product_name }}</a></td>
+									<td><a href="#">{{ $key->license_key }}</a></td>
+									<td><a href="#">{{ $key->customer_email }}</a></td>
+									<td><a href="#">{{ $key->reason }}</a></td>
+									<td><input type="text" placeholder="Enter License Key to Send" id="datainput-{{ $key->id }}" data-email="{{ $key->customer_email }}" data-id="{{ $key->id }}"></td>
+									<td><a href="#" class="button secondary icon-send send_license_key" data-id="{{ $key->id }}" data-email="{{ $key->customer_email }}" data-product="{{ $key->product_name }}">Send</a></td>
+								</tr>
+							@endforeach
+						@endif
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+	
 
 @endsection
