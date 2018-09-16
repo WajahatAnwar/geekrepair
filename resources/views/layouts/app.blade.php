@@ -194,7 +194,7 @@
                     $(".loading").show();
                   },
                   success: function(response) {
-                    $(".loading").hide();
+                    // $(".loading").hide();
                     window.location.reload();
                   }
                 });
