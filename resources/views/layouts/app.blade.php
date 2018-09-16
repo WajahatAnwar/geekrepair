@@ -60,7 +60,7 @@
             $(".send_license_key").click(function() {
                 var email = $(this).data("email");
                 var id = $(this).data("id");
-                var sendIdEmail = "$('#datainput-" + id + "')";
+                var sendIdEmail = $('#datainput-'+id);
 
                 var original_license_key = sendIdEmail.val();
                 alert(original_license_key);
