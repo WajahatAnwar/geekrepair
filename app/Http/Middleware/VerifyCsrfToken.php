@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
         'shopify/webhook/app_uninstall',
-        'shopify/webhook/order_create'
+        'shopify/webhook/order_create',
+        'send_license_email'
     ];
 }
