@@ -42,3 +42,4 @@ Route::get('mail/send', 'MailController@send');
 Route::get('mail/test_send', 'ShopifyController@test_send');
 Route::get('count', 'ShopifyController@count_resold_license_keys');
 Route::get('delete_license', 'ShopifyController@delete_license');
+Route::post('send_license_email', 'ShopifyController@send_license_email');

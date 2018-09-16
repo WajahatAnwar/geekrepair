@@ -60,18 +60,20 @@
             $(".send_license_key").click(function() {
                 var email = $(this).data("email");
                 var id = $(this).data("id");
+                var product = $(this).data("product");
+
                 var sendIdEmail = $('#datainput-'+id);
 
                 var original_license_key = sendIdEmail.val();
-                alert(original_license_key);
-                // $.ajax({
-                //   method: "POST",
-                //   url: "https://app.geekrepair.nl/send_license_email",
-                //   dataType: "script",
-                //   success: function(response) {
-                //     $("#div1").html(response);
-                //   }
-                // });
+                // alert(original_license_key);
+                $.ajax({
+                  method: "POST",
+                  url: "https://app.geekrepair.nl/send_license_email",
+                  data: { "email" : email, "customerKeyId" : id, "licenseKey" : original_license_key, "productName" : product },
+                  success: function(response) {
+                    $("#div1").html(response);
+                  }
+                });
             });
         });
     </script>
