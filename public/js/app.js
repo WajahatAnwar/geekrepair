@@ -1,39 +1,53 @@
-$(document).ready(function(){
+$(document).ready(function() {
+  $(".send_license_key").click(function() {
+    var email = $(this).data("email");
+    var id = $(this).data("id");
+    var sendIdEmail = "$('#datainput-" + id + "')";
 
-	/* Below code is mostly required in every project, so please don't remove it */
-	// $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
+    var original_license_key = sendIdEmail.val();
+    alert(original_license_key);
+    // $.ajax({
+    //   method: "POST",
+    //   url: "https://app.geekrepair.nl/send_license_email",
+    //   dataType: "script",
+    //   success: function(response) {
+    //     $("#div1").html(response);
+    //   }
     // });
-    
-    // var picker = new CP(document.querySelector('input[name="pitch_color"]'));
-    var picker2 = new CP(document.querySelector('input[name="btn_color"]'));
-    var picker3 = new CP(document.querySelector('input[name="btn_color_hover"]'));
+  });
+  /* Below code is mostly required in every project, so please don't remove it */
+  // $.ajaxSetup({
+  //     headers: {
+  //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     }
+  // });
 
-    // picker.on("drag", function(color) {
-    //     this.target.value = '#' + color;
-    // });
+  // var picker = new CP(document.querySelector('input[name="pitch_color"]'));
+  var picker2 = new CP(document.querySelector('input[name="btn_color"]'));
+  var picker3 = new CP(document.querySelector('input[name="btn_color_hover"]'));
 
-    picker2.on("drag", function(color) {
-        this.target.value = '#' + color;
-    });
-    
-    picker3.on("drag", function(color) {
-        this.target.value = '#' + color;
-    });
-    
+  // picker.on("drag", function(color) {
+  //     this.target.value = '#' + color;
+  // });
 
-    //Handling tabs click event
-    $('ul.tabs li').click(function () {
+  picker2.on("drag", function(color) {
+    this.target.value = "#" + color;
+  });
 
-        var tab_id = $(this).children().attr('href');
+  picker3.on("drag", function(color) {
+    this.target.value = "#" + color;
+  });
 
-        $('ul.tabs li').removeClass('active');
-        $('.tab-content').removeClass('current');
+  //Handling tabs click event
+  $("ul.tabs li").click(function() {
+    var tab_id = $(this)
+      .children()
+      .attr("href");
 
-        $(this).addClass('active');
-        $(tab_id).addClass('current');
-    });
+    $("ul.tabs li").removeClass("active");
+    $(".tab-content").removeClass("current");
 
+    $(this).addClass("active");
+    $(tab_id).addClass("current");
+  });
 });
