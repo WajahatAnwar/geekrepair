@@ -243,6 +243,11 @@ class ShopifyController extends Controller
 
 		$response = Mail::to($email)->send(new GeekEmail($objDemo));
 
+		if($response)
+		{
+			$deleting = DB::table('customer_withno_keys')->where('id', $customerKeyId )->delete();
+		}
+
 
 	}
 
