@@ -195,7 +195,7 @@
                   },
                   success: function(response) {
                     $(".loading").hide();
-                    parent.location.reload()
+                    parent.location.reload();
                   }
                 });
             });
