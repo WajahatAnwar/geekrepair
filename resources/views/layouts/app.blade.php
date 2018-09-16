@@ -55,26 +55,7 @@
     <script src="{{  asset('js/init.js' )}}"></script>
     <script src="{{  asset('js/prism.js' )}}"></script>
     <script src="{{  asset('js/color-picker.min.js' )}}"></script>
-    <script>
-        $(document).ready(function() {
-            $(".send_license_key").click(function() {
-                var email = $(this).data("email");
-                var id = $(this).data("id");
-                var sendIdEmail = "$('#datainput-" + id + "')";
 
-                var original_license_key = sendIdEmail.val();
-                alert(original_license_key);
-                // $.ajax({
-                //   method: "POST",
-                //   url: "https://app.geekrepair.nl/send_license_email",
-                //   dataType: "script",
-                //   success: function(response) {
-                //     $("#div1").html(response);
-                //   }
-                // });
-            });
-        });
-    </script>
     @yield('scripts')
 </body>
 </html>
