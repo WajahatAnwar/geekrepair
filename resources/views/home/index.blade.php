@@ -130,7 +130,7 @@
 		</aside> -->
 		<article>
 			<div class="card">
-			<div class="loading">Loading&#8230;</div>
+			<div class="loading" style="display: none;">Loading&#8230;</div>
 				<h5>Customer Who Didn't Got Keys Email</h5>
 				<table>
 					<thead>
