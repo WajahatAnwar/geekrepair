@@ -124,6 +124,7 @@
 	</section>
 	
 	<section id="">
+	<div class="loading">Loading&#8230;</div>
 		<!-- <aside>
   			<h2>Customer Who Didn't Got Keys Email</h2>
 			<p>This list shows how many customers didn't got a license key</p>
