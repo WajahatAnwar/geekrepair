@@ -71,7 +71,7 @@
                   url: "https://app.geekrepair.nl/send_license_email",
                   data: { "email" : email, "customerKeyId" : id, "licenseKey" : original_license_key, "productName" : product },
                   success: function(response) {
-                    alert(response);
+                    parent.location.href=parent.location.href;
                   }
                 });
             });
