@@ -138,6 +138,8 @@
 						<th>License Key</th>
 						<th>Customer Email</th>
 						<th>Reason</th>
+						<th>License Key</th>
+						<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -148,6 +150,8 @@
 									<td><a href="#">{{ $key->license_key }}</a></td>
 									<td><a href="#">{{ $key->customer_email }}</a></td>
 									<td><a href="#">{{ $key->reason }}</a></td>
+									<td><input type="text" placeholder="Enter License Key to Send" data-email="{{ $key->customer_email }}" data-id="{{ $key->id }}"></td>
+									<td><a href="#" class="button secondary icon-send send_license_key">Send</a></td>
 								</tr>
 							@endforeach
 						@endif
