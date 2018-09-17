@@ -162,7 +162,6 @@ class WebhookController extends Controller
         $objDemo->receiver = 'Valuable Customer';
 
 		$response = Mail::to($email)->send(new GeekEmail($objDemo));
-		// Log::info('Congratulations! Email Sent.');
-		// die();
+		return new Response('Webhook Handled', 200);
 	}
 }
