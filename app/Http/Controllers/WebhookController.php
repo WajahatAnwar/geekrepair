@@ -82,7 +82,7 @@ class WebhookController extends Controller
 				$resold;
 				for($x = 0; $x <= $quantity; $x++)
 				{
-					if(!empty($all_product_details[$x))
+					if(!empty($all_product_details[$x]))
 					{
 						$license_key = $all_product_details[$x]->license_key;
 						$resold = $all_product_details[$x]->resold;
