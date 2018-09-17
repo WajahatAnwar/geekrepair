@@ -147,6 +147,7 @@ class WebhookController extends Controller
 				}
 			}
 			if(count($passing_array) > 0){
+				return new Response('Webhook Handled', 200);
 				$this->send($email, $passing_array, $product_name);
 			}
 			return new Response('Webhook Handled', 200);
