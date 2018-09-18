@@ -177,7 +177,6 @@
 					<thead>
 						<tr>
 						<th>Product Name</th>
-						<th>License Key</th>
 						<th>Customer Email</th>
 						<th>Reason</th>
 						<th>License Key</th>
@@ -189,7 +188,6 @@
 							@foreach ($customers_withno_keys as $key)
 								<tr>
 									<td><a href="#">{{ $key->product_name }}</a></td>
-									<td><a href="#">{{ $key->license_key }}</a></td>
 									<td><a href="#">{{ $key->customer_email }}</a></td>
 									<td><a href="#">{{ $key->reason }}</a></td>
 									<td><input type="text" placeholder="Enter License Key to Send" id="datainput-{{ $key->id }}" data-email="{{ $key->customer_email }}" data-id="{{ $key->id }}"></td>
