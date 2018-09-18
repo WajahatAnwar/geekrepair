@@ -120,7 +120,8 @@ class WebhookController extends Controller
 								'created_at'	=> date('Y-m-d H:i:s'), 
 								'updated_at'	=> date('Y-m-d H:i:s')
 							]);
-
+							// email in one array
+							array_push($passing_array , $license_key);
 					}else if(!empty($validating_license_key))
 					{
 						$id = DB::table('customer_withno_keys')->insertGetId([
@@ -132,8 +133,6 @@ class WebhookController extends Controller
 							'updated_at'	=> date('Y-m-d H:i:s')
 						]);	
 					}
-					// email in one array
-					array_push($passing_array , $license_key);
 				}else
 				{
 					$id = DB::table('customer_withno_keys')->insertGetId([
